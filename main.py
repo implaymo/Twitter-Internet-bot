@@ -1,9 +1,12 @@
 from twiter import Twitter
-
-twiter = Twitter()
-
-twiter.sign_in_twitter()
+from internetspeed import InternetSpeed
 
 
+# twiter = Twitter()
+#
+# twiter.sign_in_twitter()
+
+internetspeed = InternetSpeed()
+internetspeed.get_internet_speed()
 
 

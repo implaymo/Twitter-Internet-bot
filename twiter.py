@@ -40,8 +40,10 @@ class Twitter:
                                                       'div/div[2]/div[2]/div[1]/div/div/div[3]/'
                                                       'div/label/div/div[2]/div[1]/input')))
         password.send_keys(f"{self.pw}")
-
         login_button = self.wait.until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="layers"]/div/div/div/div/div/div/div[2]/'
                                                       'div[2]/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div/div/div')))
         login_button.click()
+
+    def write_tweet(self):
+        pass
