@@ -22,8 +22,8 @@ class InternetSpeed:
         self.wait = WebDriverWait(self.driver, 10)
         self.driver.maximize_window()
 
-        self.downl_speed = 0
-        self.upl_speed = 0
+        self.downl_speed = ''
+        self.upl_speed = ''
 
     def get_internet_speed(self):
         start_button = self.wait.until(
@@ -31,17 +31,22 @@ class InternetSpeed:
                                                           'div/div/div[2]/div[3]/div[1]/a/span[4]')))
         start_button.click()
 
-        time.sleep(90)
+        time.sleep(60)
 
-        download_speed = self.wait.until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div/div[3]/div/div/div/div[2]/'
-                                                            'div[3]/div[3]/div/div[3]/div/div/'
-                                                            'div[2]/div[1]/div[1]/div/div[2]/span')))
-        self.downl_speed = download_speed.text
+        try:
+            download_speed = self.wait.until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div/div[3]/div/div/div/div[2]/'
+                                                                'div[3]/div[3]/div/div[3]/div/div/'
+                                                                'div[2]/div[1]/div[1]/div/div[2]/span')))
+            self.downl_speed = download_speed.text
 
 
-        upload_speed = self.wait.until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div/div[3]/div/div/'
-                                                          'div/div[2]/div[3]/div[3]/div/div[3]/'
-                                                          'div/div/div[2]/div[1]/div[2]/div/div[2]/span')))
-        self.upl_speed = upload_speed.text
+            upload_speed = self.wait.until(
+                EC.presence_of_element_located((By.XPATH, '//*[@id="container"]/div/div[3]/div/div/'
+                                                              'div/div[2]/div[3]/div[3]/div/div[3]/'
+                                                              'div/div/div[2]/div[1]/div[2]/div/div[2]/span')))
+            self.upl_speed = upload_speed.text
+        except Exception as e:
+            print(f"Error: {e}")
+        finally:
+            self.driver.quit()
